@@ -25,16 +25,22 @@ Modern sky surveys (e.g. SDSS) image hundreds of millions of galaxies, making ma
 | Layer | Output Shape | Parameters |
 |---|---|---|
 | Conv2D (32 filters, 3×3) + ReLU | 64×64×32 | 896 |
-| BatchNormalization + MaxPool | 32×32×32 | 128 |
+| BatchNormalization | 64×64×32 | 128 |
+| MaxPool | 32×32×32 | 0 |
+| Dropout | 32×32×32 | 0 |
 | Conv2D (64 filters, 3×3) + ReLU | 32×32×64 | 18,496 |
-| BatchNormalization + MaxPool | 16×16×64 | 256 |
+| BatchNormalization | 32×32×64 | 256 |
+| MaxPool | 16×16×64 | 0 |
+| Dropout | 16×16×64 | 0 |
 | Conv2D (128 filters, 3×3) + ReLU | 16×16×128 | 73,856 |
-| BatchNormalization + MaxPool | 8×8×128 | 512 |
+| BatchNormalization | 16×16×128 | 512 |
+| MaxPool | 8×8×128 | 0 |
+| Dropout | 8×8×128 | 0 |
 | Flatten | 8,192 | 0 |
-| Dense (256) + ReLU | 256 | 2,097,408 |
-| Dropout (0.5) | 256 | 0 |
-| Dense (3, Softmax) | 3 | 771 |
-| **Total Trainable Parameters** | | **2,191,875** |
+| Dense (128) + ReLU | 128 | 1,048,704 |
+| Dropout | 128 | 0 |
+| Dense (3, Softmax) | 3 | 387 |
+| **Total Trainable Parameters** | | **1,142,787** |
 
 ## Results
 
